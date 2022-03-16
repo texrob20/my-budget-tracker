@@ -82,6 +82,7 @@ function sendTransaction(isAdding) {
   let nameEl = document.querySelector("#t-name");
   let amountEl = document.querySelector("#t-amount");
   let errorEl = document.querySelector(".form .error");
+  let transactionState = "added";
 
   // validate form
   if (nameEl.value === "" || amountEl.value === "") {
@@ -112,6 +113,11 @@ function sendTransaction(isAdding) {
   populateTable();
   populateTotal();
   
+  if (!isAdding) {
+    transactionState ="subtracted";
+  }
+  window.alert ("Funds " + transactionState);
+
   // also send to server
   fetch("/api/transaction", {
     method: "POST",
